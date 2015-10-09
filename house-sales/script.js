@@ -31,6 +31,7 @@ $(function () {
             },
             yAxis: {
                 min: 0,
+                max: 3000,
                 title: {
                     text: 'House sales'
                 }
