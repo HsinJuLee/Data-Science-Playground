@@ -12,17 +12,18 @@ $(function () {
         });
 
         var postcodes = transposedArray[0]
-        var houseSales = transposedArray[3].map(function (val) { return +val; })
+        var new_houseSales = transposedArray[1].map(function (val) { return + val; })
+        var old_houseSales = transposedArray[2].map(function (val) { return + val; })
 
         $('#container').highcharts({
             chart: {
                 type: 'column'
             },
             title: {
-                text: 'House sales in different London postcodes'
+                text: 'London New/Old Build Sales 2013-2014'
             },
             subtitle: {
-                text: 'Source: Government data'
+                text: 'Source: data.london.gov.uk'
             },
             xAxis: {
                 categories: transposedArray[0],
@@ -37,7 +38,7 @@ $(function () {
             tooltip: {
                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
                 pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                    '<td style="padding:0"><b>{point.y:.0f} sales </b></td></tr>',
                 footerFormat: '</table>',
                 shared: true,
                 useHTML: true
@@ -49,15 +50,18 @@ $(function () {
                 }
             },
             series: [{
-                name: 'House sales',
-                data: houseSales
+                name: 'New Build Sales',
+                data: new_houseSales
 
-            }]
+            },
+            {
+                name: 'Old Build Sales',
+                data: old_houseSales}]
         });
     }
 
     $.ajax({
-        url: "price-by-postcode-whether-newbuild.csv",
+        url: "new_old_by_postcode.csv",
         async: false,
         success: function (csvd) {
             var data = $.csv.toArrays(csvd);
