@@ -15,7 +15,7 @@ $(function () {
         var new_houseSales = transposedArray[1].map(function (val) { return + val; })
         var old_houseSales = transposedArray[2].map(function (val) { return + val; })
 
-        $('#container').highcharts({
+        $('#house-sales').highcharts({
             chart: {
                 type: 'column'
             },
@@ -31,7 +31,6 @@ $(function () {
             },
             yAxis: {
                 min: 0,
-                max: 3000,
                 title: {
                     text: 'House sales'
                 }

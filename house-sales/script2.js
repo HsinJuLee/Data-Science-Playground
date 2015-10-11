@@ -12,10 +12,20 @@ $(function () {
         });
 
         var postcodes = transposedArray[0]
-        var new_housePrice = transposedArray[3].map(function if (val= 'NULL' ) { return 0 } else { return + val; })
-        var old_housePrice = transposedArray[4].map(function if (val= 'NULL' ) { return 0 } else { return + val; })
 
-        $('#container').highcharts({
+        function mapCsvNumbers(val) {
+            if (val === 'NULL') {
+                return 0;
+            } else {
+                return +val;
+            }
+
+        }
+
+        var new_housePrice = transposedArray[3].map(mapCsvNumbers)
+        var old_housePrice = transposedArray[4].map(mapCsvNumbers)
+
+        $('#house-prices').highcharts({
             chart: {
                 type: 'column'
             },
