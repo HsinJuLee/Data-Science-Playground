@@ -46,10 +46,27 @@ $(function () {
                 }
             },
             tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y:.2f} £ </b></td></tr>',
-                footerFormat: '</table>',
+                formatter: function () {
+                    var boxText = '<b>' + this.x + '</b>';
+
+                    function formatValue(val) {
+                        if (val === 0) {
+                            return "-"
+                        } else if (val < 1000) {
+                            return Math.round(val);
+                        } else if (val < 1000000) {
+                            return Math.round(val / 1000) + 'K £';
+                        } else {
+                            return Math.round(val / 1000) / 1000 + "M £";
+                        }
+                    }
+
+                    $.each(this.points, function() {
+                        boxText += '<br/>' + this.series.name + ': ' + formatValue(this.y);
+                    });
+
+                    return boxText;
+                },
                 shared: true,
                 useHTML: true
             },
