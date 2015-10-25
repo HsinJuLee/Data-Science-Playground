@@ -42,7 +42,7 @@ $(function () {
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'House Price'
+                    text: 'House Price (£)'
                 }
             },
             tooltip: {
@@ -51,18 +51,18 @@ $(function () {
 
                     function formatValue(val) {
                         if (val === 0) {
-                            return "-"
+                            return "No Sales"
                         } else if (val < 1000) {
                             return Math.round(val);
                         } else if (val < 1000000) {
-                            return Math.round(val / 1000) + 'K £';
+                            return (Math.ceil(val/1000 * 1) / 1) + 'K';
                         } else {
-                            return Math.round(val / 1000) / 1000 + "M £";
+                            return (Math.ceil(val/1000000 * 10) / 10) + "M";
                         }
                     }
 
                     $.each(this.points, function() {
-                        boxText += '<br/>' + this.series.name + ': ' + formatValue(this.y);
+                    boxText += '<br/><span style="color:' + this.series.color + '">' + this.series.name + '</span>:' + formatValue(this.y);
                     });
 
                     return boxText;
@@ -98,3 +98,4 @@ $(function () {
         complete: function () {}
     });
 });
+    
