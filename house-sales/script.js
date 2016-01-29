@@ -61,7 +61,7 @@ $(function () {
     }
 
     $.ajax({
-        url: "house-sales/new_old_by_postcode.csv",
+        url: "new_old_by_postcode.csv",
         async: false,
         success: function (csvd) {
             var data = $.csv.toArrays(csvd);
